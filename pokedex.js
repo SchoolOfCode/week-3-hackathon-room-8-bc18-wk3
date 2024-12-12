@@ -1,16 +1,34 @@
+// let randomPokemon = Math.floor(Math.random() * 1026) Commented out as unnecessary
+const pokeType = document.getElementById("type");
+
 async function getPokemon() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/charizard");
+   try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 1026)}`);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const json = await response.json();
     console.log(json);
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
     const pokeName = document.getElementById("pokemon");
     pokeName.textContent = json.name;
-    const pokeType = document.getElementById("type");
-    pokeType.textContent = `Type: ${json.types[0].type.name}`;
+    pokeType.innerHTML = "";
+    for (i=0; i < json.types.length; i++) {
+    const newType = document.createElement("p")
+    newType.id = "type"
+    newType.textContent = `Type: ${json.types[i].type.name}`;
+    pokeType.append(newType)
+    }
+}  catch (error) {
+    console.error("Error fetching the Pokémon:", error);
+}
 }
 
-getPokemon();
+const randomButtonHandler = document.getElementById("randoMon");
+randomButtonHandler.addEventListener("click", getPokemon);
+
+
+// getPokemon();
+
 
 // types - need to be able to add second type  - loop.
 
