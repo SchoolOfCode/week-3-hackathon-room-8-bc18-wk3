@@ -31,7 +31,6 @@ async function getPokemon() {
   }
   getPokemonFlavour();
 }
-console.log(pokeNumber);
 
 async function getPokemonFlavour() {
   const response = await fetch(
@@ -55,14 +54,16 @@ function upperCaseFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-document.getElementById("search").addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    const query = event.target.value.toLowerCase();
-    console.log(query);
-    searchPokemon(query);
-    event.target.value = "";
-  }
-})
+document
+  .getElementById("search")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      const query = event.target.value.toLowerCase();
+      console.log(query);
+      searchPokemon(query);
+      event.target.value = "";
+    }
+  });
 
 async function searchPokemon(query) {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
@@ -72,6 +73,7 @@ async function searchPokemon(query) {
   img.src = json.sprites.front_default;
   const pokeNameEl = document.getElementById("pokemon");
   let pokeName = upperCaseFirstLetter(json.name);
+  pokeNumber = json.id;
   pokeNameEl.textContent = pokeName;
   pokeType.innerHTML = "";
   for (i = 0; i < json.types.length; i++) {
@@ -81,5 +83,6 @@ async function searchPokemon(query) {
       json.types[i].type.name
     )}`;
     pokeType.append(newType);
-}
+  }
+  getPokemonFlavour();
 }
