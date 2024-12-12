@@ -2,6 +2,7 @@
 const pokeType = document.getElementById("type");
 const randomButtonHandler = document.getElementById("randoMon");
 randomButtonHandler.addEventListener("click", getPokemon);
+let pokeNumber = 0;
 
 async function getPokemon() {
   try {
@@ -10,9 +11,9 @@ async function getPokemon() {
     );
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const json = await response.json();
-    console.log(json);
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
+    pokeNumber = json.id;
     const pokeNameEl = document.getElementById("pokemon");
     let pokeName = upperCaseFirstLetter(json.name);
     pokeNameEl.textContent = pokeName;
@@ -27,6 +28,26 @@ async function getPokemon() {
     }
   } catch (error) {
     console.error("Error fetching the Pokémon:", error);
+  }
+  getPokemonFlavour();
+}
+console.log(pokeNumber);
+
+async function getPokemonFlavour() {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-species/${pokeNumber}`
+  );
+  const json = await response.json();
+  const flavorText = document.createElement("p");
+
+  for (i = 0; i < json.flavor_text_entries.length; i++) {
+    console.log(json.flavor_text_entries[i].language.name);
+    if (json.flavor_text_entries[i].language.name === "en") {
+      flavorText.id = "flavor";
+      flavorText.textContent = json.flavor_text_entries[i].flavor_text;
+      pokeType.append(flavorText);
+      return;
+    }
   }
 }
 
