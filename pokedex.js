@@ -54,16 +54,26 @@ function upperCaseFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-document
-  .getElementById("search")
-  .addEventListener("keypress", function (event) {
+const searchInput = document.getElementById("search");
+const searchButton = document.getElementById("pokeSearch");
+
+searchInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-      const query = event.target.value.toLowerCase();
+      const query = searchInput.value.toLowerCase();
       console.log(query);
       searchPokemon(query);
       event.target.value = "";
     }
   });
+
+  document.getElementById("pokeSearch").addEventListener("click", function () {
+    const query = searchInput.value.toLowerCase();
+    console.log(query);
+    searchPokemon(query);
+    searchInput.value = "";
+    }
+  );
+
 
 async function searchPokemon(query) {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
