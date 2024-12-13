@@ -9,7 +9,15 @@ musicButtonHandler.addEventListener("click", play);
 const audio = new Audio("pokemon-theme.mp3");
 
 function play() {
+  audio.volume = 0.08;
   audio.paused ? audio.play() : audio.pause();
+}
+
+let pokeCry = new Audio();
+
+function playCry() {
+  pokeCry.volume = 0.1;
+  pokeCry.play();
 }
 
 async function getPokemon() {
@@ -19,6 +27,9 @@ async function getPokemon() {
     );
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const json = await response.json();
+    console.log(json);
+    pokeCry = new Audio(json.cries.latest);
+    playCry();
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
     img.style.width = "25%";
@@ -77,6 +88,8 @@ document
 async function searchPokemon(query) {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
   const json = await response.json();
+  pokeCry = new Audio(json.cries.latest);
+  playCry();
   console.log(json);
   const img = document.getElementById("pokeball");
   img.src = json.sprites.front_default;
