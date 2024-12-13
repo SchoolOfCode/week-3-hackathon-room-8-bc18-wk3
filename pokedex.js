@@ -4,6 +4,22 @@ const randomButtonHandler = document.getElementById("randoMon");
 randomButtonHandler.addEventListener("click", getPokemon);
 let pokeNumber = 0;
 
+const musicButtonHandler = document.getElementById("music");
+musicButtonHandler.addEventListener("click", play);
+const audio = new Audio("pokemon-theme.mp3");
+
+function play() {
+  audio.volume = 0.08;
+  audio.paused ? audio.play() : audio.pause();
+}
+
+let pokeCry = new Audio();
+
+function playCry() {
+  pokeCry.volume = 0.1;
+  pokeCry.play();
+}
+
 async function getPokemon() {
   try {
     const response = await fetch(
@@ -11,13 +27,18 @@ async function getPokemon() {
     );
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const json = await response.json();
+    console.log(json);
+    pokeCry = new Audio(json.cries.latest);
+    playCry();
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
+    img.style.width = "25%";
     pokeNumber = json.id;
     const pokeNameEl = document.getElementById("pokemon");
     let pokeName = upperCaseFirstLetter(json.name);
     pokeNameEl.textContent = pokeName;
     pokeType.innerHTML = "";
+    getPokemonFlavour();
     for (i = 0; i < json.types.length; i++) {
       const newType = document.createElement("p");
       newType.id = "type";
@@ -29,7 +50,6 @@ async function getPokemon() {
   } catch (error) {
     console.error("Error fetching the Pokémon:", error);
   }
-  getPokemonFlavour();
 }
 
 async function getPokemonFlavour() {
@@ -81,6 +101,8 @@ async function searchPokemon(query) {
     }
     const json = await response.json();
     console.log(json);
+    pokeCry = new Audio(json.cries.latest);
+    playCry();
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
     const pokeNameEl = document.getElementById("pokemon");
