@@ -4,6 +4,14 @@ const randomButtonHandler = document.getElementById("randoMon");
 randomButtonHandler.addEventListener("click", getPokemon);
 let pokeNumber = 0;
 
+const musicButtonHandler = document.getElementById("music");
+musicButtonHandler.addEventListener("click", play);
+const audio = new Audio("pokemon-theme.mp3");
+
+function play() {
+  audio.paused ? audio.play() : audio.pause();
+}
+
 async function getPokemon() {
   try {
     const response = await fetch(

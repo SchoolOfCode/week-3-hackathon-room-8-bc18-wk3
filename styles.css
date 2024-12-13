@@ -1,10 +1,10 @@
 @font-face {
-  font-family: "Pokemon-Font";
+  font-family: 'Pokemon-Font';
   src: url(Pokemon-Pixel-Font.woff2);
 }
 
 body {
-  font-family: "Pokemon-Font";
+  font-family: 'Pokemon-Font';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,22 +13,19 @@ body {
   margin: 0;
 }
 
-p {
-  font-size: 150%;
-}
 .background-wrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-image: url("pokedex.png");
-  background-size: 80% auto;
+  width: 100%; 
+  aspect-ratio: 16 / 9; 
+  background-image: url('pokedex.png'); 
+  background-size: 80% auto; 
   background-position: center 38%;
   background-repeat: no-repeat;
 }
 
 .container {
-  position: absolute;
-  top: 27%;
+  position: absolute; 
+  top: 27%; 
   left: 26%;
   padding: 10px;
   background-color: #e9ecef;
@@ -36,11 +33,12 @@ p {
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 20px;
   width: 35%;
+  max-width: 550px;
 }
 
 h1 {
   font-size: 2.5rem;
-  font-family: "Pokemon-Font";
+  font-family: 'Pokemon-Font';
   margin-bottom: 0 0 10px;
   text-align: center;
 }
@@ -49,7 +47,7 @@ h1 {
   display: block;
   width: 80px;
   margin: 0 auto 20px;
-}
+} 
 
 .pokemon-card {
   background-color: #e9ecef;
@@ -73,8 +71,8 @@ button {
   display: block;
   margin: 10px auto;
   padding: 10px 10px;
-  font-family: "Pokemon-Font";
-  font-size: 1rem;
+  font-family: 'Pokemon-Font';
+  font-size: 1rem; 
   border: none;
   background-color: #007bff;
   color: white;
@@ -95,11 +93,11 @@ button:active {
 }
 
 input[type="search"] {
-  font-family: "Pokemon-Font";
-  width: 80%;
-  max-width: 300px;
-  padding: 6px 10px;
-  font-size: 1rem;
+  font-family: 'Pokemon-Font';
+  width: 80%; 
+  max-width: 300px; 
+  padding: 6px 10px; 
+  font-size: 1rem; 
   margin-top: 10px;
 }
 
