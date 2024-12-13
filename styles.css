@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Pokemon-Font';
+  font-size: 125%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +33,9 @@ body {
   /* background-color: transparent; */
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 20px;
-  width: 35%;
-  max-width: 550px;
+  width: 40%;
+  max-height: 40%;
+  overflow-y: scroll;
 }
 
 h1 {
@@ -46,7 +48,7 @@ h1 {
 #pokeball {
   display: block;
   width: 80px;
-  margin: 0 auto 20px;
+  margin: 20px auto 0px;
 } 
 
 .pokemon-card {
@@ -69,7 +71,7 @@ h1 {
 
 button {
   display: block;
-  margin: 10px auto;
+  margin: 12px ;
   padding: 10px 10px;
   font-family: 'Pokemon-Font';
   font-size: 1rem; 
@@ -105,4 +107,16 @@ label {
   font-size: 0.9rem;
   display: block;
   margin-bottom: 5px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
