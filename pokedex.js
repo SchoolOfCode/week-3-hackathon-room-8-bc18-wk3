@@ -13,11 +13,13 @@ async function getPokemon() {
     const json = await response.json();
     const img = document.getElementById("pokeball");
     img.src = json.sprites.front_default;
+    img.style.width = "25%";
     pokeNumber = json.id;
     const pokeNameEl = document.getElementById("pokemon");
     let pokeName = upperCaseFirstLetter(json.name);
     pokeNameEl.textContent = pokeName;
     pokeType.innerHTML = "";
+    getPokemonFlavour();
     for (i = 0; i < json.types.length; i++) {
       const newType = document.createElement("p");
       newType.id = "type";
@@ -29,7 +31,6 @@ async function getPokemon() {
   } catch (error) {
     console.error("Error fetching the Pokémon:", error);
   }
-  getPokemonFlavour();
 }
 
 async function getPokemonFlavour() {
